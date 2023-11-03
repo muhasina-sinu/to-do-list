@@ -1,0 +1,16 @@
+
+
+{% block content %}
+  <table class="centre" >
+    {% for task in tasks %}
+      <tr><td>{{ task.title }}</td> <td>{% if task.completed %}(Completed){% endif %} </td><td></td><td><a href="{% url 'task_delete' task.id %}">Delete</a></td><td><a href="{% url 'task_update' task.id %}">Update</a></td></tr>
+    {% empty %}
+      <li>No tasks to display.</li>
+    {% endfor %}
+  </table>
+<br/>
+  <a href="{% url 'task_create' %}">Create a new task</a>
+  <br/>
+  
+{% endblock %}
+
