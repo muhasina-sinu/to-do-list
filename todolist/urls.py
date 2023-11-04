@@ -24,7 +24,7 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')),
     path('', combined_view, name='combined_view'),  # Map the URL to the new view
     path('',TemplateView.as_view(template_name = 'home.html'),name='home'),
-    path('',TemplateView.as_view(template_name = 'home.html'),name='home'),
+    path('logout/',TemplateView.as_view(template_name = 'base.html'),name='base'),
     path('tasks/', include('tasks.urls')),
     path('accounts/', include('accounts.urls')),
     

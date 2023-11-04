@@ -1,16 +1,30 @@
-
-
 {% block content %}
-  <table class="centre" >
-    {% for task in tasks %}
-      <tr><td>{{ task.title }}</td> <td>{% if task.completed %}(Completed){% endif %} </td><td></td><td><a href="{% url 'task_delete' task.id %}">Delete</a></td><td><a href="{% url 'task_update' task.id %}">Update</a></td></tr>
-    {% empty %}
-      <li>No tasks to display.</li>
-    {% endfor %}
-  </table>
-<br/>
-  <a href="{% url 'task_create' %}">Create a new task</a>
-  <br/>
-  
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{% if task.completed %}<span class="badge badge-success">Completed</span>{% else %}<span class="badge badge-warning">Incomplete</span>{% endif %}</td>
+                    <td>
+                        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'task_update' task.id %}" class="btn btn-primary">Update</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No tasks to display.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'task_create' %}" class="btn btn-success">Create a new task</a>
+</div>
 {% endblock %}
-

@@ -1,19 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    Hi {{ user.username }},
-    <br/>
-    <h2>Your Tasks</h2>
+
+<div class="container">
     {% include 'task_list.html' %}
-
-    <a href="{% url 'logout' %}">Logout</a>
-
-{% else %}
-    
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'register' %}">New User?</a>
-
-{% endif %}
+</div>
 {% endblock %}

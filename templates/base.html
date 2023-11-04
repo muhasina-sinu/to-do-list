@@ -1,11 +1,53 @@
+{% load bootstrap4 %}
+{% load static %}
+
 <!DOCTYPE html>
+<html>
 <head>
-<title> To-do List </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>TO-DO List</title>
 </head>
-<h2>TO-DO LIST</h2>
 <body>
-    <main>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">To Do List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" >Hi {{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h1>Welcome to Your To-Do List</h1>
+        <p>An organized to-do list is your key to increased productivity and reduced stress. By keeping track of your tasks and priorities, you can manage your time efficiently, stay focused on what matters most, and accomplish your goals. With the ability to create, update, and delete tasks, our to-do list app empowers you to take charge of your day and achieve more with ease.</p>
+    </div>
+    
+    <div class="container">
         {% block content %}
-        {% endblock%}
-    </main>
+        <!-- Content of child templates will be placed here -->
+        {% endblock %}
+    </div>
+
+    <!-- Include Bootstrap CSS and JS files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+</html>
